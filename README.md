@@ -1,29 +1,11 @@
-Memory/Concentration Game - Psuedocode
+# Memory/Concentration Game
 
-Define required constants:
-     - pictures (for cards)
-       - store pictures in array
+1. <Your game's title>: A description of your game. Background info of the game is a nice touch.
 
-Define required variables used to track the state of the game:
-     - cards
-       - use <div> and access via DOM
-     - selection (first click, second click)
-     - winner
-     - countdown timer
-     
-Functions needed
-     - shuffle cards
-          -  Fisher-Yates shuffle algorithm (had to Google)
-     - assign pictures to the cards
-          -  create <img> elements for each card (via DOM) and link to 
-     - handle click events
-          - start game and timer on initial click        
-          - track click one/two and switch back & forth
-          - "flip" cards with click one/two
-     - check for a match
-          - if match, keep cards "flipped up", keep playing
-          - if no match, turn cards over, keep playing
-     - countdown timer
-          - if all cards are not face up before timer reaches 0, declare loser
-     - check winner
-          - if all cards are face up, declare winner
+2. Screenshot(s): Images of your actual game.
+
+3. Technologies Used: List of the technologies used, e.g., JavaScript, HTML, CSS...
+
+4. Getting Started: In this section include the link to your deployed game and any instructions you deem important.
+
+5. Next Steps: Planned future enhancements (icebox items).
