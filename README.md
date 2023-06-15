@@ -1,4 +1,11 @@
-# Memory/Concentration Game - Psuedocode
+# Memory/Concentration Game
+
+## Wireframe
+
+![first draft UI](Matching-Game-Wireframe.png)
+
+
+## Psuedocode
 
 1. Define required constants:
      - pictures (for cards)
