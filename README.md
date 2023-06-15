@@ -13,7 +13,7 @@
 
 2. Define required variables used to track the state of the game:
      - cards
-       - use <div> and access via DOM
+       - use `<div>` and access via DOM
      - selection (first click, second click)
      - winner
      - countdown timer
@@ -22,7 +22,7 @@
      - shuffle cards
           -  Fisher-Yates shuffle algorithm (had to Google)
      - assign pictures to the cards
-          -  create <img> elements for each card (via DOM) and link to 
+          -  create `<img>` elements for each card (via DOM) and link to 
      - handle click events
           - start game and timer on initial click        
           - track click one/two and switch back & forth
