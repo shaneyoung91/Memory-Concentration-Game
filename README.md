@@ -1,17 +1,17 @@
-Memory/Concentration Game - Psuedocode
+# Memory/Concentration Game - Psuedocode
 
-Define required constants:
+1. Define required constants:
      - pictures (for cards)
        - store pictures in array
 
-Define required variables used to track the state of the game:
+2. Define required variables used to track the state of the game:
      - cards
        - use <div> and access via DOM
      - selection (first click, second click)
      - winner
      - countdown timer
      
-Functions needed
+3. Functions needed
      - shuffle cards
           -  Fisher-Yates shuffle algorithm (had to Google)
      - assign pictures to the cards
