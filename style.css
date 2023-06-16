@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-body {
+body, main {
     font-family: Helvetica;
     margin: 0;
     display: flex;
@@ -19,7 +19,6 @@ body {
     gap: 2vmin;
 
 }
-
 
 .card {
     display: flex;

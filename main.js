@@ -5,18 +5,17 @@ const pictures = ['images/img-1.jpg', 'images/img-2.jpg']
 
 /*----- state variables -----*/
 // represents first click / second click
-const playerSelection;
-
-const winner;
-
-const countdownTimer;
+let playerSelection;
+let winner;
+let match;
+let countdownTimer;
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card')
 
 
 /*----- event listeners -----*/
-
+document.getElementsByClassName('.card').addEventListner('click', handleClick);
 // Click Event(s)
   //  Start game and time on inital click
   //  Keep track of click one/two and switch back
@@ -24,10 +23,45 @@ const cards = document.querySelectorAll('.card')
   //  Prevent more than 2 cards from being "flipped"
   //  "Play Again" button to stay active and can reset game at any point
 
-
-
-
 /*----- functions -----*/
+init();
+
+// Initialize all state variables, then call render()
+function init() {
+  playerSelection = {
+    clickOne: 1,
+    clickTwo: 2
+  }
+  match = checkforMatch();
+  winner = checkForWin();
+  countdownTimer = countdown();
+  render();
+}
+
+
+function handleClick(evt){
+  render();
+}
+
+function render() {
+  renderShuffle();
+  renderAssignment();
+  checkforWin();
+  checkforMatch();
+  // Will add countdown timer later (bonus, nice to have)
+  }
+
+function checkForWin() {
+
+};
+
+function countdown() {
+
+};
+
+function checkforMatch() {
+
+}
 
 // (1) Shuffle Cards
   // Fisher Yates shuffle algorithim
