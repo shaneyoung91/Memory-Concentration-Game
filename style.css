@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Helvetica;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+.card-container  {
+    display: grid;
+    grid-template-columns: repeat(3, 8vmin);
+    grid-template-rows: repeat(3, 8vmin);
+    margin-top: 8vmin;
+    gap: 10vmin;
+    cursor: pointer;
+}
+
+.card {
+    height: 15vmin;
+    width: 12vmin;
+    border: 0.5vmin solid black;
+    background-color: lightcyan;
+}
