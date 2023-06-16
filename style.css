@@ -9,21 +9,40 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-  }
+}
 
-
-.card-container  {
-    display: grid;
+.card-container {
+    display: flex;
     grid-template-columns: repeat(3, 8vmin);
     grid-template-rows: repeat(3, 8vmin);
-    margin-top: 8vmin;
-    gap: 10vmin;
-    cursor: pointer;
+    margin-top: 5vmin;
+    gap: 2vmin;
+
 }
 
+
 .card {
-    height: 15vmin;
-    width: 12vmin;
-    border: 0.5vmin solid black;
-    background-color: lightcyan;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+.back-card{
+    height: 20vmin;
+    width: 15vmin;
+    background-color: lightblue;
 }
+
+.front-card {
+    height: 19vmin;
+    width: 15vmin;
+    position: absolute;
+    background-color: lightblue;
+}
+
+.front-card img {
+    width: 14vmin;
+    height: 19vmin;
+  }
