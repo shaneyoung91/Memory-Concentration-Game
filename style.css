@@ -23,8 +23,8 @@ body {
 }
 
 .card {
-    height: 100px;
-    width: 100px;
+    height: 20.5vmin;
+    width: 18.5vmin;
     position: relative;
     border: 1px dashed black;
   }

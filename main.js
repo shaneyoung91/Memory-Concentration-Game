@@ -65,8 +65,8 @@ function renderAssignPics() {
     const addImg = frontCardEl[i];
     const newImg = document.createElement('img');
     newImg.src = pictures[i];
-    newImg.style.height = "100px";
-    newImg.style.width = "100px";
+    newImg.style.height = "20vmin";
+    newImg.style.width = "18vmin";
     addImg.appendChild(newImg)
   // set <img> height and width using style
   }
