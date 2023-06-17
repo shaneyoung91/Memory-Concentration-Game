@@ -1,21 +1,25 @@
 /*----- constants -----*/
 // will add more pictures to fully build out the game board
-const pictures = ['images/img-1.jpg', 'images/img-2.jpg']
+const pictures = ['images/img-1.jpg', 'images/img-2.jpg', 'images/img-1.jpg', 'images/img-2.jpg']
 
 
 /*----- state variables -----*/
 // represents first click / second click
 let playerSelection;
+// check for winner if all cards face up and timer not 0:00
 let winner;
+// check for card match
 let match;
+// start timer, and declare loser if timer reaches 0:00
 let countdownTimer;
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card')
+const frontCardEl = document.getElementsByClassName('front-card');
 
 
 /*----- event listeners -----*/
-document.getElementsByClassName('.card').addEventListner('click', handleClick);
+// document.getElementsByClassName('card').addEventListner('click', handleClick);
 // Click Event(s)
   //  Start game and time on inital click
   //  Keep track of click one/two and switch back
@@ -39,28 +43,49 @@ function init() {
 }
 
 
-function handleClick(evt){
-  render();
+function render() {
+  renderShuffle(pictures);
+  renderAssignPics();
+  checkforMatch();
+  checkforWin();
+  }
+
+function renderShuffle(array) {
+  // Fisher Yates shuffle algorithim
+  for (let origId = array.length - 1; origId > 0; origId--) {
+    const newId = Math.floor(Math.random() * (origId + 1));
+    [array[origId], array[newId]] = [array[newId], array[origId]];
+  }
+  return array;
 }
 
-function render() {
-  renderShuffle();
-  renderAssignment();
-  checkforWin();
-  checkforMatch();
-  // Will add countdown timer later (bonus, nice to have)
+function renderAssignPics() {
+  // create <img> elements for front card <div>
+  for (let i = 0; i < frontCardEl.length; i++) {
+    const addImg = frontCardEl[i];
+    const newImg = document.createElement('img');
+    newImg.src = pictures[i];
+    newImg.style.height = "100px";
+    newImg.style.width = "100px";
+    addImg.appendChild(newImg)
+  // set <img> height and width using style
   }
+}
+
+function checkforMatch() {
+
+}
 
 function checkForWin() {
 
-};
+}
 
 function countdown() {
 
 };
 
-function checkforMatch() {
-
+function handleClick(evt){
+  render();
 }
 
 // (1) Shuffle Cards
