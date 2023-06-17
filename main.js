@@ -1,6 +1,7 @@
 /*----- constants -----*/
 // will add more pictures to fully build out the game board
-const pictures = ['images/img-1.jpg', 'images/img-2.jpg', 'images/img-1.jpg', 'images/img-2.jpg']
+const pictures = ['images/img-1.jpg', 'images/img-2.jpg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpeg', 
+'images/img-1.jpg', 'images/img-2.jpg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpeg']
 
 
 /*----- state variables -----*/
@@ -33,15 +34,14 @@ init();
 // Initialize all state variables, then call render()
 function init() {
   playerSelection = {
-    clickOne: 1,
-    clickTwo: 2
+    clickOne: 0,
+    clickTwo: 1
   }
   match = checkforMatch();
   winner = checkForWin();
   countdownTimer = countdown();
   render();
 }
-
 
 function render() {
   renderShuffle(pictures);
@@ -52,6 +52,7 @@ function render() {
 
 function renderShuffle(array) {
   // Fisher Yates shuffle algorithim
+  // Randomizes order of 
   for (let origId = array.length - 1; origId > 0; origId--) {
     const newId = Math.floor(Math.random() * (origId + 1));
     [array[origId], array[newId]] = [array[newId], array[origId]];
@@ -60,7 +61,7 @@ function renderShuffle(array) {
 }
 
 function renderAssignPics() {
-  // create <img> elements for front card <div>
+  // create <img> elements to front card <div>
   for (let i = 0; i < frontCardEl.length; i++) {
     const addImg = frontCardEl[i];
     const newImg = document.createElement('img');
@@ -68,7 +69,6 @@ function renderAssignPics() {
     newImg.style.height = "20vmin";
     newImg.style.width = "18vmin";
     addImg.appendChild(newImg)
-  // set <img> height and width using style
   }
 }
 
@@ -85,14 +85,19 @@ function countdown() {
 };
 
 function handleClick(evt){
+  // Track playerSelection and reset clicks
+  // For in loop ??? 
+  // for (let key in object variable) {}
+
+
+
+  if (clicks > 2) {
+    console.countReset();
+  }
   render();
 }
 
-// (1) Shuffle Cards
-  // Fisher Yates shuffle algorithim
-     // Takes a list a list of all elements of the sequence, and continually determines the next element
-     // in the shuffled sequence by randomly drawing an element from the list until no elements remain 
-     // (definition source: Wikipedia)
+
 
 // (2) Assign pictures to the cards
   // Create <img> elements for each card (via DOM), post-shuffle position (or maybe asynchronous?)
