@@ -5,15 +5,13 @@ const pictures = ['images/img-1.jpg', 'images/img-2.jpg', 'images/img-3.jpg', 'i
 
 
 /*----- state variables -----*/
-// represents first click / second click
+// represents first click / second click - MAY NOT NEED ANYMORE ???
 let playerClick;
-// check for winner if all cards face up and timer not 0:00
+// check for winner
 let winner;
-// check for card match
-let match;
-// start timer, and declare loser if timer reaches 0:00
+// start timer on inital click, and declare loser if timer reaches 0
 let countdownTimer;
-// array to store 
+// array to store selected cards
 let selectedCards;
 
 
@@ -21,28 +19,30 @@ let selectedCards;
 const cards = document.querySelectorAll('.card')
 const frontCardEl = document.getElementsByClassName('front-card');
 const imageEl = document.getElementsByTagName('img');
-
+const timer = document.getElementById('timer');
+const startBtn = document.getElementById('start-btn');
 
 /*----- event listeners -----*/
 cards.forEach(card => card.addEventListener('click', handleClick));
 
 // Click Event(s)
-  //  Start game and time on inital click
-  //  "Play Again" button to stay active and can reset game at any point
+  //  WORK TO DO - Start game and time on inital click
+  //  WORK TO DO -"Play Again" button to stay active and can reset game at any point. Also needs to reset timer.
 
 /*----- functions -----*/
 init();
 
 // Initialize all state variables, then call render()
 function init() {
-  // Second guessing if we need to keep track of playerClick (clickOne / clickTwo) ?????????
+  // ????????????? Second guessing if we need to keep track of playerClick (clickOne / clickTwo) ?????????
   playerClick = {
     clickOne: null,
     clickTwo: null
   }
   selectedCards = [];
   winner = true;
-  countdownTimer = countdown();
+  // Set time to 2 minutes (120 seconds)
+  countdownTimer = 120;
   render();
 }
 
@@ -51,6 +51,7 @@ function render() {
   renderAssignPics();
   checkforMatch();
   checkforWin();
+  countdown();
   }
 
 function renderShuffle(array) {
@@ -86,8 +87,9 @@ function handleClick(evt){
   if (selectedCards.length === 2) {
     // Disable card clicks temporarily to prevent multiple selections
     cards.forEach((card) => card.removeEventListener('click', handleClick));
-  checkforMatch();
-}}
+    checkforMatch();
+  }
+}
 
 function checkforMatch() {
   // If match, remove selection class and add match class
@@ -105,28 +107,37 @@ function checkforMatch() {
 }
 
 function countdown() {
-  // If all cards are not face up before timer reaches 0, 
-    // (1) declare loser
+  // If timer reaches 0, 
+    // (1) declare loser 
     // (2) end game  -> disable clicks on cards, only activate play again button
-
+  const startTime = setInterval(function() {
+    console.log(countdownTimer);
+    countdownTimer--;
+    if (countdownTimer === 0) {
+      console.log("YOU LOSE! PLAY AGAIN?");
+      clearInterval(startTime);
+    }
+    checkForWin();
+    timer.innerHTML = `Timer: ${countdownTimer}`;
+  }, 1000);
 };
 
 function checkForWin() {
-  // (5) Check for Winner
-    // If all cards are "face up", declare winner
-    // What if we emptied out the pictures array and then wrote a condtional statement,
-      // to determine winner ????????????????
+    // If all <img> elements DO NOT contain class 'match',
+      // set winner to 'false', else set to 'true' and return message
   for (let i = 0; i < imageEl.length; i++) {
     const image = imageEl[i];
     if (!image.classList.contains('match')) {
       winner = false;
+      return 'KEEP PLAYING';
   } else {
-    winner = true;
-  }
- }
-  if (winner === true) {
-    return "YOU WIN";
-  } else {
-    return "KEEP PLAYING";
+      winner = true;
   }
 }
+  if (winner = true) {
+    return 'YOU WIN';
+    clearInterval(startTime)
+  }
+ }
+  // WORK TO DO - MAKE 'YOU WIN' MESSAGE APPEAR ON SCREEN, 
+    // DON'T NEED 'KEEP PLAYING' MESSAGE ON SCREEN
