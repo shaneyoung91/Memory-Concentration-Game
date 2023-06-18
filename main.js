@@ -120,6 +120,8 @@ function checkForWin() {
     const image = imageEl[i];
     if (!image.classList.contains('match')) {
       winner = false;
+  } else {
+    winner = true;
   }
  }
   if (winner === true) {
