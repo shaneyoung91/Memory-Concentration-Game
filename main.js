@@ -5,12 +5,12 @@ const pictures = ['images/img-1.jpg', 'images/img-2.jpg', 'images/img-3.jpg', 'i
 
 
 /*----- state variables -----*/
-// represents first click / second click - MAY NOT NEED ANYMORE ???
-let playerClick;
 // check for winner
 let winner;
-// start timer on inital click, and declare loser if timer reaches 0
+// declares amount of time
 let countdownTimer;
+// start time
+let startTime;
 // array to store selected cards
 let selectedCards;
 
@@ -21,28 +21,26 @@ const frontCardEl = document.getElementsByClassName('front-card');
 const imageEl = document.getElementsByTagName('img');
 const timer = document.getElementById('timer');
 const startBtn = document.getElementById('start-btn');
+const objective = document.getElementById('objective');
 
 /*----- event listeners -----*/
 cards.forEach(card => card.addEventListener('click', handleClick));
 
 // Click Event(s)
-  //  WORK TO DO - Start game and time on inital click
-  //  WORK TO DO -"Play Again" button to stay active and can reset game at any point. Also needs to reset timer.
+  //  WORK TO DO - Start game and timer on inital click
+  //  WORK TO DO - "Play Again" button to stay active and can reset game at any point. Should also re-initialize.
 
 /*----- functions -----*/
 init();
 
 // Initialize all state variables, then call render()
 function init() {
-  // ????????????? Second guessing if we need to keep track of playerClick (clickOne / clickTwo) ?????????
-  playerClick = {
-    clickOne: null,
-    clickTwo: null
-  }
   selectedCards = [];
   winner = true;
   // Set time to 2 minutes (120 seconds)
-  countdownTimer = 120;
+  countdownTimer = 25;
+  // Start Time
+  startTime;
   render();
 }
 
@@ -70,8 +68,8 @@ function renderAssignPics() {
     const frontCardImg = frontCardEl[i];
     const newImg = document.createElement('img');
     newImg.src = pictures[i];
-    newImg.style.height = "20vmin";
-    newImg.style.width = "18vmin";
+    newImg.style.height = "19.8vmin";
+    newImg.style.width = "17.8vmin";
     frontCardImg.appendChild(newImg)
   }
 }
@@ -108,36 +106,45 @@ function checkforMatch() {
 
 function countdown() {
   // If timer reaches 0, 
-    // (1) declare loser 
-    // (2) end game  -> disable clicks on cards, only activate play again button
-  const startTime = setInterval(function() {
-    console.log(countdownTimer);
+    // Declare loser (see checkForWin function)
+  // Start button disabled after game begins
+  // WORK TO DO - CONVERT TIME TO MINUTES AND SECONDS
+  startTime = setInterval(function() {
     countdownTimer--;
-    if (countdownTimer === 0) {
-      console.log("YOU LOSE! PLAY AGAIN?");
-      clearInterval(startTime);
-    }
-    checkForWin();
     timer.innerHTML = `Timer: ${countdownTimer}`;
+    startBtn.disabled = true;
+    checkForWin();
   }, 1000);
 };
+
+
+function stopTimer() {
+  // Separate function to stop timer at 0.
+  clearInterval(startTime);
+}
 
 function checkForWin() {
     // If all <img> elements DO NOT contain class 'match',
       // set winner to 'false', else set to 'true' and return message
+    // Declare winner, loser, or keep playing
+      // Remove click listener from cards when winner or loser is declared
   for (let i = 0; i < imageEl.length; i++) {
     const image = imageEl[i];
+    if (countdownTimer === 0) {
+      stopTimer();
+      cards.forEach((card) => card.removeEventListener('click', handleClick));
+      return objective.innerHTML = `<h3 style="color:red">Time's up! You Lose! Play Again?</h3>`;
+    }
     if (!image.classList.contains('match')) {
       winner = false;
-      return 'KEEP PLAYING';
+      return objective.innerHTML = "";
   } else {
       winner = true;
   }
 }
   if (winner = true) {
-    return 'YOU WIN';
-    clearInterval(startTime)
+    stopTimer();
+    cards.forEach((card) => card.removeEventListener('click', handleClick));
+    return objective.innerHTML = `<h3 style="color:#0B81F0">CONGRATS! YOU WIN!</h3>`;
   }
  }
-  // WORK TO DO - MAKE 'YOU WIN' MESSAGE APPEAR ON SCREEN, 
-    // DON'T NEED 'KEEP PLAYING' MESSAGE ON SCREEN
