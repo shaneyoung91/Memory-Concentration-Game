@@ -1,19 +1,12 @@
 /*----- constants -----*/
-// will add more pictures to fully build out the game board
-const pictures = ['images/img-1.jpg', 'images/img-2.jpg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpeg', 
-'images/img-1.jpg', 'images/img-2.jpg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpeg']
-
+const pictures = ['images/img-1.jpeg', 'images/img-2.jpeg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpg',
+'images/img-1.jpeg', 'images/img-2.jpeg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpg']
 
 /*----- state variables -----*/
-// check for winner
-let winner;
-// declares amount of time
-let countdownTimer;
-// start time
-let startTime;
-// array to store selected cards
-let selectedCards;
-
+let winner; // check for winner
+let countdownTimer; // declares amount of time
+let startTime; // start timer
+let selectedCards; // array to store selected cards
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card')
@@ -22,13 +15,10 @@ const imageEl = document.getElementsByTagName('img');
 const timer = document.getElementById('timer');
 const startBtn = document.getElementById('start-btn');
 const objective = document.getElementById('objective');
+const playAgainBtn = document.getElementById('playagain-btn');
 
 /*----- event listeners -----*/
 cards.forEach(card => card.addEventListener('click', handleClick));
-
-// Click Event(s)
-  //  WORK TO DO - Start game and timer on inital click
-  //  WORK TO DO - "Play Again" button to stay active and can reset game at any point. Should also re-initialize.
 
 /*----- functions -----*/
 init();
@@ -39,8 +29,6 @@ function init() {
   winner = true;
   // Set time to 2 minutes (120 seconds)
   countdownTimer = 25;
-  // Start Time
-  startTime;
   render();
 }
 
@@ -147,4 +135,9 @@ function checkForWin() {
     cards.forEach((card) => card.removeEventListener('click', handleClick));
     return objective.innerHTML = `<h3 style="color:#0B81F0">CONGRATS! YOU WIN!</h3>`;
   }
+ }
+
+ function playAgain () {
+  // Restarts the game
+  window.location.reload()
  }
