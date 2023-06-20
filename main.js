@@ -11,6 +11,7 @@ let selectedCards; // array to store selected cards
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card')
 const frontCardEl = document.getElementsByClassName('front-card');
+const backCardEl = document.getElementsByClassName('back-card');
 const imageEl = document.getElementsByTagName('img');
 const timer = document.getElementById('timer');
 const startBtn = document.getElementById('start-btn');
@@ -56,22 +57,22 @@ function renderAssignPics() {
     const frontCardImg = frontCardEl[i];
     const newImg = document.createElement('img');
     newImg.src = pictures[i];
-    newImg.style.height = "19.8vmin";
-    newImg.style.width = "17.8vmin";
+    newImg.style.height = "19.88vmin";
+    newImg.style.width = "17.88vmin";
     frontCardImg.appendChild(newImg)
   }
 }
 
 function handleClick(evt){
-  // Guard rail (do nothing if cards already selected (clickOne/clickTwo), or cards are a match)
-  if (evt.target.classList.contains('selection') || evt.target.classList.contains('match')) {
+  // Guard rail (do nothing if cards already 'selected', or cards are a match)
+  if (evt.target.classList.contains('selected') || evt.target.classList.contains('match')) {
     return;
   }
-  evt.target.classList.add('selection');
+  evt.target.classList.add('selected');
   evt.target.classList.add('flipUp');
-  selectedCards = document.querySelectorAll('.selection');
-  if (selectedCards.length === 2) {
-    // Disable card clicks temporarily to prevent multiple selections
+  selectedCards = document.querySelectorAll('.selected');
+    if (selectedCards.length === 2) {
+    // Disable card clicks to prevent multiple selections
     cards.forEach((card) => card.removeEventListener('click', handleClick));
     checkforMatch();
   }
@@ -81,11 +82,13 @@ function checkforMatch() {
   // If match, remove selection class and add match class
   if (selectedCards[0].src === selectedCards[1].src) {
     selectedCards.forEach((card) => {
-      card.classList.remove('selection');
+      card.classList.remove('selected');
       card.classList.add('match');
     })
   } else {  // Remove cards from selectedCards array
-    selectedCards.forEach((card) => card.classList.remove('selection', 'flipUp'));
+      selectedCards.forEach((card) => {
+        card.classList.remove('selected', 'flipUp');
+    });
   }
   // Re-enable card clicks and keep playing
   cards.forEach((card) => card.addEventListener('click', handleClick));
@@ -104,7 +107,6 @@ function countdown() {
     checkForWin();
   }, 1000);
 };
-
 
 function stopTimer() {
   // Separate function to stop timer at 0.
