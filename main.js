@@ -1,6 +1,6 @@
 /*----- constants -----*/
 const pictures = ['images/img-1.jpeg', 'images/img-2.jpeg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpg',
-'images/img-1.jpeg', 'images/img-2.jpeg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpg']
+'images/img-1.jpeg', 'images/img-2.jpeg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpg'];
 
 /*----- state variables -----*/
 let winner; // check for winner
@@ -9,7 +9,7 @@ let startTime; // start timer
 let selectedCards; // array to store selected cards
 
 /*----- cached elements  -----*/
-const cards = document.querySelectorAll('.card')
+const cards = document.querySelectorAll('.card');
 const frontCardEl = document.getElementsByClassName('front-card');
 const backCardEl = document.getElementsByClassName('back-card');
 const imageEl = document.getElementsByTagName('img');
@@ -24,12 +24,11 @@ cards.forEach(card => card.addEventListener('click', handleClick));
 /*----- functions -----*/
 init();
 
-// Initialize all state variables, then call render()
+// Initialize state variables, then call render()
 function init() {
   selectedCards = [];
   winner = true;
-  // Set time to 120 seconds (2 minutes)
-  countdownTimer = 120;
+  countdownTimer = 120; // Set time to 120 seconds (2 minutes)
   render();
 }
 
@@ -41,9 +40,7 @@ function render() {
   cards.forEach((card) => card.removeEventListener('click', handleClick));
   }
 
-function renderShuffle(array) {
-  // Fisher Yates shuffle algorithim
-  // Randomizes order of pictures array
+function renderShuffle(array) {  // Fisher Yates shuffle algorithim - Randomizes order of pictures array
   for (let origId = array.length - 1; origId > 0; origId--) {
     const newId = Math.floor(Math.random() * (origId + 1));
     [array[origId], array[newId]] = [array[newId], array[origId]];
@@ -51,8 +48,7 @@ function renderShuffle(array) {
   return array;
 }
 
-function renderAssignPics() {
-  // create <img> elements for front card <div>
+function renderAssignPics() { // create <img> elements for front card <div>
   for (let i = 0; i < cards.length; i++) {
     const cardsImg = cards[i];
     const newImg = document.createElement('img');
@@ -70,16 +66,13 @@ function handleClick(evt){
   }
   evt.target.classList.add('selected');
   evt.target.classList.add('flipUp');
-  // WORK TO DO - REVERSE FADE IN / FADE OUT ANIMATION FOR FRONT-CARD AND BACK-CARD
   evt.target.style.visibility = "hidden";
   evt.target.style.opacity = "0";
-  evt.target.style.transition = "visibility 0s 2s, opacity 1s linear";
+  evt.target.style.transition = "visibility 0s 1s, opacity 1s linear";
   selectedCards.push(evt.target);
-  // selectedCards = document.querySelectorAll('.selected');
-    if (selectedCards.length === 2) {
-    // Disable card clicks to prevent multiple selections
-    cards.forEach((card) => card.removeEventListener('click', handleClick));
-    setTimeout(checkForMatch, 1000);
+    if (selectedCards.length === 2) { // Disable card clicks to prevent multiple selections
+      cards.forEach((card) => card.removeEventListener('click', handleClick));
+      setTimeout(checkForMatch, 1000);
   }
 }
 
@@ -116,15 +109,14 @@ function countdown() {
     if (seconds < 10) {
       seconds = `0${seconds}`;
     }
-    timer.innerHTML = `Timer: ${minutes}:${seconds}`;
+    timer.innerHTML = `Time: ${minutes}:${seconds}`;
     startBtn.disabled = true;
     checkForWin();
   }, 1000);
   cards.forEach((card) => card.addEventListener('click', handleClick));
 };
 
-function stopTimer() { 
-  // Separate function to stop timer at 0.
+function stopTimer() { // Separate function to stop timer at 0.
   clearInterval(startTime);
 }
 

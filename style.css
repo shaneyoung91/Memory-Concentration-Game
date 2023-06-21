@@ -6,8 +6,6 @@
 
 body {
     font-family: 'Quicksand', sans-serif;
-    height: 100vh;
-    width: auto;
     text-align: center;
     background-color: #D1E3F4;
 }
@@ -30,9 +28,10 @@ h1 {
     grid-template-columns: repeat(4, auto);
     justify-content: center;
     align-content: center;
-    row-gap: 15px;
-    column-gap: 15px;
-    margin: 19px;
+    row-gap: 18px;
+    column-gap: 22px;
+    margin: 0px;
+    padding: 5px;
 }
 
 .card { 
@@ -41,6 +40,7 @@ h1 {
     position: relative;
     border: 3px solid black;
     cursor: pointer;
+    box-shadow: 10px 5px 5px black;
   }
 
 .back-card {
