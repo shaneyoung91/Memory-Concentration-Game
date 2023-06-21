@@ -38,6 +38,7 @@ function render() {
   renderAssignPics();
   checkForMatch();
   checkForWin();
+  cards.forEach((card) => card.removeEventListener('click', handleClick));
   }
 
 function renderShuffle(array) {
@@ -119,9 +120,10 @@ function countdown() {
     startBtn.disabled = true;
     checkForWin();
   }, 1000);
+  cards.forEach((card) => card.addEventListener('click', handleClick));
 };
 
-function stopTimer() {
+function stopTimer() { 
   // Separate function to stop timer at 0.
   clearInterval(startTime);
 }
@@ -155,6 +157,6 @@ function checkForWin() {
  }
 
  function playAgain () {
-  // Restarts the game
+  // Restarts the game, but lazy version....
   window.location.reload()
  }
