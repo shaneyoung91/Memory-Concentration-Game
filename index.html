@@ -13,10 +13,10 @@
 <body>
     <h1>DOG MEMORY<br>
     (SEI LOVELACE EDITION)</h1>
-    <h3 id="objective"></h3>
+    <h2 id="objective">Objective: Match all pairs of dogs within the allotted time!</h2>
     <button id="start-btn" onclick="countdown()">START GAME</button>
     <button id="playagain-btn" onclick="playAgain()">PLAY AGAIN</button>
-    <h5 id="timer">TIME: 2:00</h5>
+    <h5 id="timer">TIME: 1:30</h5>
     <div class="card-container">
         <div class="card">
             <div class="back-card" id="0"></div>
@@ -55,5 +55,12 @@
             <div class="back-card" id="11"></div>
         </div>
     </div>
+    <div id="lightbox">
+        <div class="lightbox-bg"></div>
+        <div class="lightbox-message">
+          <button id="close-btn">X</button>
+          <h1 id="message"></h1>
+        </div>
+      </div>
 </body>
 </html>

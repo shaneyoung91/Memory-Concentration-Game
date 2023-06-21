@@ -10,16 +10,18 @@ let selectedCards; // array to store selected cards
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card');
-const frontCardEl = document.getElementsByClassName('front-card');
 const backCardEl = document.getElementsByClassName('back-card');
 const imageEl = document.getElementsByTagName('img');
 const timer = document.getElementById('timer');
 const startBtn = document.getElementById('start-btn');
-const objective = document.getElementById('objective');
 const playAgainBtn = document.getElementById('playagain-btn');
+const message = document.getElementById('message');
+const lightbox = document.getElementById('lightbox');
+const closeBtn = document.getElementById('close-btn')
 
 /*----- event listeners -----*/
 cards.forEach(card => card.addEventListener('click', handleClick));
+closeBtn.addEventListener('click', hideLightbox);
 
 /*----- functions -----*/
 init();
@@ -28,7 +30,7 @@ init();
 function init() {
   selectedCards = [];
   winner = true;
-  countdownTimer = 120; // Set time to 120 seconds (2 minutes)
+  countdownTimer = 90; // Set time to 90 seconds (1.5 minutes)
   render();
 }
 
@@ -68,7 +70,7 @@ function handleClick(evt){
   evt.target.classList.add('flipUp');
   evt.target.style.visibility = "hidden";
   evt.target.style.opacity = "0";
-  evt.target.style.transition = "visibility 0s 1s, opacity 1s linear";
+  evt.target.style.transition = "visibility 1s, opacity 1s linear";
   selectedCards.push(evt.target);
     if (selectedCards.length === 2) { // Disable card clicks to prevent multiple selections
       cards.forEach((card) => card.removeEventListener('click', handleClick));
@@ -120,6 +122,14 @@ function stopTimer() { // Separate function to stop timer at 0.
   clearInterval(startTime);
 }
 
+function showLightbox() {
+  lightbox.style.display = 'block';
+};
+
+ function hideLightbox() {
+  lightbox.style.display = 'none';
+}
+
 function checkForWin() {
     // If all <img> elements DO NOT contain class 'match',
       // set winner to 'false', else set to 'true' and return message
@@ -130,7 +140,8 @@ function checkForWin() {
     if (countdownTimer === -1) {
       stopTimer();
       cards.forEach((card) => card.removeEventListener('click', handleClick));
-      return objective.innerHTML = `<h3 style="color:red">Time's up! You Lose! Play Again?</h3>`;
+      showLightbox();
+      return message.innerHTML = `<h1 style="color:red">TIME IS UP! YOU LOSE!</h1>`;
     }
     if (!image.offsetParent.firstElementChild.classList.contains('match')) {
       winner = false;
@@ -142,13 +153,11 @@ function checkForWin() {
   if (winner === true) {
     stopTimer();
     cards.forEach((card) => card.removeEventListener('click', handleClick));
-    return objective.innerHTML = `<h3 style="color:#0B81F0">CONGRATS! YOU WIN!</h3>`;
-  } else {
-    return objective.innerHTML = `<h3>Objective: Match all pairs of dogs within the allotted time!</h3>`;
+    showLightbox();
+    return message.innerHTML = `<h1 style="color:#0B81F0">CONGRATS! YOU WIN!</h1>`;
   }
  }
 
- function playAgain () {
-  // Restarts the game, but lazy version....
+ function playAgain () { // Restarts the game
   window.location.reload()
  }

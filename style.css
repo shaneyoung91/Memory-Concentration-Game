@@ -13,12 +13,11 @@ body {
 h1 {
     margin: 10px;
     padding: 5px;
-    font-size: 37px;
+    font-size: 40px;
 }
 
 #objective {
-    margin: 15px;
-    font-size: 17px;
+    margin: 5px;
     color: black;
     word-spacing: 2.5px;
 }
@@ -67,8 +66,49 @@ h1 {
     height: 4.5vmin;
     width: 15vmin;
     font-size: 2vmin;
-    margin: 5px;
+    margin: 15px;
     padding: 5px;
     cursor: pointer;
     font-family: 'Quicksand', sans-serif;
 }
+
+#lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+  }
+  
+.lightbox-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+.lightbox-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #D1E3F4;
+    padding: 20px;
+    width: 500px;
+    text-align: center;
+    border-radius: 25px;
+  }
+
+#close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+  }
