@@ -1,21 +1,20 @@
 /*----- constants -----*/
 const pictures = ['images/img-1.jpeg', 'images/img-2.jpeg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpg',
 'images/img-1.jpeg', 'images/img-2.jpeg', 'images/img-3.jpg', 'images/img-4.jpg', 'images/img-5.jpg', 'images/img-6.jpg'];
+let startTime; // start timer
 
 /*----- state variables -----*/
 let winner; // check for winner
 let countdownTimer; // declares amount of time
-let startTime; // start timer
 let selectedCards; // array to store selected cards
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card');
-const backCardEl = document.getElementsByClassName('back-card');
 const imageEl = document.getElementsByTagName('img');
 const timer = document.getElementById('timer');
 const startBtn = document.getElementById('start-btn');
 const playAgainBtn = document.getElementById('playagain-btn');
-const message = document.getElementById('message');
+const lightboxMessage = document.getElementById('lb-message');
 const lightbox = document.getElementById('lightbox');
 const closeBtn = document.getElementById('close-btn')
 
@@ -26,11 +25,10 @@ closeBtn.addEventListener('click', hideLightbox);
 /*----- functions -----*/
 init();
 
-// Initialize state variables, then call render()
 function init() {
   selectedCards = [];
   winner = true;
-  countdownTimer = 90; // Set time to 90 seconds (1.5 minutes)
+  countdownTimer = 90; // Set time to 'x' seconds 
   render();
 }
 
@@ -118,7 +116,7 @@ function countdown() {
   cards.forEach((card) => card.addEventListener('click', handleClick));
 };
 
-function stopTimer() { // Separate function to stop timer at 0.
+function stopTimer() {
   clearInterval(startTime);
 }
 
@@ -141,7 +139,7 @@ function checkForWin() {
       stopTimer();
       cards.forEach((card) => card.removeEventListener('click', handleClick));
       showLightbox();
-      return message.innerHTML = `<h1 style="color:red">TIME IS UP! YOU LOSE!</h1>`;
+      return lightboxMessage.innerHTML = `<h1 style="color:#FF6347">TIME IS UP!<br>YOU LOSE!</h1>`;
     }
     if (!image.offsetParent.firstElementChild.classList.contains('match')) {
       winner = false;
@@ -154,7 +152,7 @@ function checkForWin() {
     stopTimer();
     cards.forEach((card) => card.removeEventListener('click', handleClick));
     showLightbox();
-    return message.innerHTML = `<h1 style="color:#0B81F0">CONGRATS! YOU WIN!</h1>`;
+    return lightboxMessage.innerHTML = `<h1 style="color:#0B81F0">CONGRATS!<br>YOU WIN!</h1>`;
   }
  }
 
