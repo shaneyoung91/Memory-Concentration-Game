@@ -1,8 +1,6 @@
 # DOG MEMORY (SEI Lovelace Edition)
     
-A Memory/Concentration game starring the pups of the SEI Lovelace Cohort.
-
-The objective of the game is to find all six pairs of cards before the time runs out. The game consists of 12 cards arranged in a grid, face-down initially. The player needs to click on two cards at a time to reveal their faces. If the two revealed cards match, they remain face-up. Otherwise, they are flipped back face-down, and the player can try again.
+### Memory/Concentration game - Starring the Pups of the SEI Lovelace Cohort.
 
 ![screenshot of game](Game-Board.png)
 
@@ -18,17 +16,25 @@ The objective of the game is to find all six pairs of cards before the time runs
 8. If you complete the game before the timer reaches zero, you win! Otherwise, you lose.
 9. You can choose to restart the game, at any point, by clicking the "Play Again" button.
 
+## Link to Game 
+
+[DOG MEMORY](https://shaneyoung91.github.io/Memory-Concentration-Game/)
+
 ## Technologies Used
 
 1. HTML
 2. CSS
 3. JavaScript
-    
-## Link to Game: 
 
-[DOG MEMORY](https://shaneyoung91.github.io/Memory-Concentration-Game/)
-   
+
 ## Future Enhancements
    - [ ] Moving animations while game is in play (dog walking/running)
    - [ ] Animations (visual or audio) for win/lose message
    - [ ] Animations to timer
+
+## Credits
+Photos Provided By:
+- Selin B.
+- Lauren J.
+- Samantha F.
+- Payne F.
