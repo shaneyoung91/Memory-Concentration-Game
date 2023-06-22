@@ -7,6 +7,7 @@ let startTime; // start timer
 let winner; // check for winner
 let countdownTimer; // declares amount of time
 let selectedCards; // array to store selected cards
+let isCardClickable; // Ensures card is not clicked multiple times during game 
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card');
@@ -28,6 +29,7 @@ init();
 function init() {
   selectedCards = [];
   winner = true;
+  isCardClickable = true;
   countdownTimer = 90; // Set time to 'x' seconds 
   render();
 }
@@ -60,19 +62,29 @@ function renderAssignPics() { // create <img> elements for front card <div>
 }
 
 function handleClick(evt){
-  // Guard rail (do nothing if cards already 'selected', or cards are a match)
+  if (!isCardClickable) {
+    return; // Guard rail
+  }
+  
+  // Guard rail
   if (evt.target.classList.contains('selected') || evt.target.classList.contains('match')) {
     return;
   }
+
   evt.target.classList.add('selected');
   evt.target.classList.add('flipUp');
   evt.target.style.visibility = "hidden";
   evt.target.style.opacity = "0";
   evt.target.style.transition = "visibility 1s, opacity 1s linear";
   selectedCards.push(evt.target);
-    if (selectedCards.length === 2) { // Disable card clicks to prevent multiple selections
-      cards.forEach((card) => card.removeEventListener('click', handleClick));
-      setTimeout(checkForMatch, 1000);
+
+  if (selectedCards.length === 2) { // Disable card clicks to prevent multiple selections
+    isCardClickable = false;
+    cards.forEach((card) => card.removeEventListener('click', handleClick));
+    setTimeout(() => {
+      checkForMatch();
+      isCardClickable = true;
+    }, 1000);
   }
 }
 
@@ -83,6 +95,8 @@ function checkForMatch() {
       selectedCards.forEach((card) => {
         card.classList.remove('selected');
         card.classList.add('match');
+        card.nextElementSibling.style.pointerEvents = "none"; // Guard rail
+        card.parentElement.style.pointerEvents = "none"; // Guard rail 
       })
     } else {  // Remove cards from selectedCards array
         selectedCards.forEach((card) => {
