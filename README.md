@@ -4,7 +4,7 @@
 ### Objective of the game is to find all the matching pairs before time runs out.
 ### The player has 90 seconds to find 6 pairs (12 cards total).
 
-    ![screenshot of game](Game-Board.png)
+![screenshot of game](Game-Board.png)
 
 ### Technologies Used
    
@@ -13,7 +13,8 @@
     3. JavaScript
     
 ### Link to Game: [DOG MEMORY](https://shaneyoung91.github.io/Memory-Concentration-Game/)
-    - Click "Start Game" to begin play
+    
+Click "Start Game" to begin play
 
    
 ### Future Enhancements
