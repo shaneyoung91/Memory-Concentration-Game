@@ -70,10 +70,8 @@ function handleClick(evt){
   }
   evt.target.classList.add('selected');
   evt.target.classList.add('flipUp');
-  evt.target.style.visibility = "hidden";
   evt.target.style.opacity = "0";
   evt.target.style.transition = "visibility 1s, opacity 1s linear";
-  evt.target.parentElement.style.pointerEvents = "none";
   selectedCards.push(evt.target);
   if (selectedCards.length === 2) { // Disable card clicks to prevent multiple selections
     isCardClickable = false;
@@ -98,10 +96,8 @@ function checkForMatch() {
     } else {  // Remove cards from selectedCards array
         selectedCards.forEach((card) => {
           card.classList.remove('selected', 'flipUp');
-          card.style.visibility = 'visible';
-          card.style.opacity = '1';
+          card.style.opacity = "1";
           card.style.transition = "visibility 1s, opacity 1s linear";;
-          card.parentElement.style.removeProperty('pointer-events');
       });
     }
   }  
