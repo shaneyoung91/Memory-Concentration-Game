@@ -109,7 +109,7 @@ function countdown() {
     if (seconds < 10) {
       seconds = `0${seconds}`;
     }
-    timer.innerHTML = `Time: ${minutes}:${seconds}`;
+    timer.innerHTML = `TIME: ${minutes}:${seconds}`;
     startBtn.disabled = true;
     checkForWin();
   }, 1000);
