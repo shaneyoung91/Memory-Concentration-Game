@@ -7,7 +7,7 @@ let startTime; // start timer
 let winner; // check for winner
 let countdownTimer; // declares amount of time
 let selectedCards; // array to store selected cards
-let isCardClickable; // Ensures card is not clicked multiple times during game 
+let isCardClickable; // Ensures selected card is not "double clicked" during game
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card');
@@ -50,7 +50,7 @@ function renderShuffle(array) {  // Fisher Yates shuffle algorithim - Randomizes
   return array;
 }
 
-function renderAssignPics() { // create <img> elements for front card <div>
+function renderAssignPics() {
   for (let i = 0; i < cards.length; i++) {
     const cardsImg = cards[i];
     const newImg = document.createElement('img');
@@ -83,8 +83,7 @@ function handleClick(evt){
   }
 }
 
-function checkForMatch() {
-  // If match, remove selection class and add match class
+function checkForMatch() {   // If match, remove selected class and add match class
   if (selectedCards.length === 2) {
     if (selectedCards[0].nextElementSibling.src === selectedCards[1].nextElementSibling.src) {
       selectedCards.forEach((card) => {
