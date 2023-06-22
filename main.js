@@ -62,22 +62,19 @@ function renderAssignPics() { // create <img> elements for front card <div>
 }
 
 function handleClick(evt){
-  if (!isCardClickable) {
-    return; // Guard rail
+  if (!isCardClickable) { // Guard rail
+    return; 
   }
-  
-  // Guard rail
-  if (evt.target.classList.contains('selected') || evt.target.classList.contains('match')) {
+  if (evt.target.classList.contains('selected') || evt.target.classList.contains('match')) {  // Guard rail
     return;
   }
-
   evt.target.classList.add('selected');
   evt.target.classList.add('flipUp');
   evt.target.style.visibility = "hidden";
   evt.target.style.opacity = "0";
   evt.target.style.transition = "visibility 1s, opacity 1s linear";
+  evt.target.parentElement.style.pointerEvents = "none";
   selectedCards.push(evt.target);
-
   if (selectedCards.length === 2) { // Disable card clicks to prevent multiple selections
     isCardClickable = false;
     cards.forEach((card) => card.removeEventListener('click', handleClick));
@@ -104,6 +101,7 @@ function checkForMatch() {
           card.style.visibility = 'visible';
           card.style.opacity = '1';
           card.style.transition = "visibility 1s, opacity 1s linear";;
+          card.parentElement.style.removeProperty('pointer-events');
       });
     }
   }  
