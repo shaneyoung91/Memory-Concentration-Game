@@ -7,7 +7,6 @@ let startTime; // start timer
 let winner; // check for winner
 let countdownTimer; // declares amount of time
 let selectedCards; // array to store selected cards
-let isCardClickable; // Ensures selected card is not "double clicked" during game
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card');
@@ -32,15 +31,13 @@ function init() {
   isCardClickable = true;
   countdownTimer = 90; // Set time to 'x' seconds 
   render();
-}
+};
 
 function render() {
   renderShuffle(pictures);
   renderAssignPics();
-  checkForMatch();
-  checkForWin();
   cards.forEach((card) => card.removeEventListener('click', handleClick));
-  }
+  };
 
 function renderShuffle(array) {  // Fisher Yates shuffle algorithim - Randomizes order of pictures array
   for (let origId = array.length - 1; origId > 0; origId--) {
@@ -48,43 +45,36 @@ function renderShuffle(array) {  // Fisher Yates shuffle algorithim - Randomizes
     [array[origId], array[newId]] = [array[newId], array[origId]];
   }
   return array;
-}
+};
 
-function renderAssignPics() {
+function renderAssignPics() { // Assign img to each card, using pictures array
   for (let i = 0; i < cards.length; i++) {
     const cardsImg = cards[i];
     const newImg = document.createElement('img');
     newImg.src = pictures[i];
-    newImg.style.height = "19.88vmin";
-    newImg.style.width = "17.88vmin";
+    newImg.style.height = "19.70vmin";
+    newImg.style.width = "18.30vmin";
     cardsImg.appendChild(newImg)
   }
-}
+};
 
 function handleClick(evt){
-  if (!isCardClickable) { // Guard rail
-    return; 
-  }
   if (evt.target.classList.contains('selected') || evt.target.classList.contains('match')) {  // Guard rail
     return;
   }
-  evt.target.classList.add('selected');
-  evt.target.classList.add('flipUp');
+  evt.target.classList.add('selected', 'flipUp');
   evt.target.style.opacity = "0";
   evt.target.style.transition = "visibility 1s, opacity 1s linear";
   selectedCards.push(evt.target);
-  if (selectedCards.length === 2) { // Disable card clicks to prevent multiple selections
-    isCardClickable = false;
+  if (selectedCards.length === 2) { // Disable card clicks to prevent more than 2 cards from being selected
     cards.forEach((card) => card.removeEventListener('click', handleClick));
     setTimeout(() => {
       checkForMatch();
-      isCardClickable = true;
     }, 1000);
   }
-}
+};
 
 function checkForMatch() {   // If match, remove selected class and add match class
-  if (selectedCards.length === 2) {
     if (selectedCards[0].nextElementSibling.src === selectedCards[1].nextElementSibling.src) {
       selectedCards.forEach((card) => {
         card.classList.remove('selected');
@@ -92,23 +82,19 @@ function checkForMatch() {   // If match, remove selected class and add match cl
         card.nextElementSibling.style.pointerEvents = "none"; // Guard rail
         card.parentElement.style.pointerEvents = "none"; // Guard rail 
       })
-    } else {  // Remove cards from selectedCards array
+    } else {  // If no match, remove class from cards in array
         selectedCards.forEach((card) => {
           card.classList.remove('selected', 'flipUp');
           card.style.opacity = "1";
           card.style.transition = "visibility 1s, opacity 1s linear";;
       });
     }
-  }  
-  // Re-enable card clicks and keep playing
+  // Re-enable card clicks and reset array to empty
   cards.forEach((card) => card.addEventListener('click', handleClick));
   selectedCards = [];
 }
 
-function countdown() {
-  // If timer reaches 0, 
-    // Declare loser (see checkForWin function)
-  // Start button disabled after game begins
+function countdown() { // Begin countdown after Start button is clicked. Disable Start button after game begins.
   startTime = setInterval(function() {
     let minutes = Math.floor(countdownTimer / 60);
     let seconds = (countdownTimer % 60);
@@ -125,7 +111,7 @@ function countdown() {
 
 function stopTimer() {
   clearInterval(startTime);
-}
+};
 
 function showLightbox() {
   lightbox.style.display = 'block';
@@ -133,13 +119,9 @@ function showLightbox() {
 
  function hideLightbox() {
   lightbox.style.display = 'none';
-}
+};
 
-function checkForWin() {
-    // If all back-card elements DO NOT contain class 'match',
-      // set winner to 'false', else set to 'true' and return message
-    // Declare winner, loser, or keep playing
-      // Remove click listener from cards when winner or loser is declared
+function checkForWin() { // If all back-card elements DO NOT contain class 'match', set winner to 'false', else set to 'true' and return message
   for (let i = 0; i < backCardEl.length; i++) {
     const backCard = backCardEl[i];
     if (countdownTimer === -1) {
@@ -154,15 +136,15 @@ function checkForWin() {
   } else {
     winner = true;
   }
-}
-  if (winner === true) {
+};
+  if (winner === true) { // Remove click from cards when winner or loser is declared
     stopTimer();
     cards.forEach((card) => card.removeEventListener('click', handleClick));
     showLightbox();
     return lightboxMessage.innerHTML = `<h1 style="color:#0B81F0">CONGRATS!<br>YOU WIN!</h1>`;
   }
- }
+ };
 
  function playAgain () { // Restarts the game
   window.location.reload();
- }
+ };

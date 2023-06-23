@@ -35,17 +35,17 @@ h1 {
 
 .card { 
     height: 20.5vmin;
-    width: 18.5vmin;
+    width: 18.99vmin;
     position: relative;
-    border: 3px solid black;
+    border: 4px solid black;
     cursor: pointer;
     box-shadow: 10px 5px 5px black;
   }
 
 .back-card {
     position: absolute;
-    height: 19.88vmin;
-    width: 17.88vmin;
+    height: 19.70vmin;
+    width: 18.30vmin;
     background-color: #F4E2D1;
     background-image: url('images/back-card-logo.jpg');
     background-size: contain;
