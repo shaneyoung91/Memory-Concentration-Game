@@ -11,13 +11,13 @@ let isCardClickable; // Ensures selected card is not "double clicked" during gam
 
 /*----- cached elements  -----*/
 const cards = document.querySelectorAll('.card');
-const imageEl = document.getElementsByTagName('img');
+const backCardEl = document.getElementsByClassName('back-card');
 const timer = document.getElementById('timer');
 const startBtn = document.getElementById('start-btn');
 const playAgainBtn = document.getElementById('playagain-btn');
 const lightboxMessage = document.getElementById('lb-message');
 const lightbox = document.getElementById('lightbox');
-const closeBtn = document.getElementById('close-btn')
+const closeBtn = document.getElementById('close-btn');
 
 /*----- event listeners -----*/
 cards.forEach(card => card.addEventListener('click', handleClick));
@@ -136,19 +136,19 @@ function showLightbox() {
 }
 
 function checkForWin() {
-    // If all <img> elements DO NOT contain class 'match',
+    // If all back-card elements DO NOT contain class 'match',
       // set winner to 'false', else set to 'true' and return message
     // Declare winner, loser, or keep playing
       // Remove click listener from cards when winner or loser is declared
-  for (let i = 0; i < imageEl.length; i++) {
-    const image = imageEl[i];
+  for (let i = 0; i < backCardEl.length; i++) {
+    const backCard = backCardEl[i];
     if (countdownTimer === -1) {
       stopTimer();
       cards.forEach((card) => card.removeEventListener('click', handleClick));
       showLightbox();
       return lightboxMessage.innerHTML = `<h1 style="color:#FF6347">TIME IS UP!<br>YOU LOSE!</h1>`;
     }
-    if (!image.offsetParent.firstElementChild.classList.contains('match')) {
+    if (!backCard.classList.contains('match')) {
       winner = false;
       break;
   } else {
@@ -164,5 +164,5 @@ function checkForWin() {
  }
 
  function playAgain () { // Restarts the game
-  window.location.reload()
+  window.location.reload();
  }
