@@ -26,6 +26,34 @@
 ![winner message](images/Game-Winner.png)
 ![loser message](images/Game-Loser.png)
 
+## Code Preview
+
+```js
+function checkForWin() {
+  for (let i = 0; i < backCardEl.length; i++) {
+    const backCard = backCardEl[i];
+    if (countdownTimer === -1) {
+      stopTimer();
+      cards.forEach((card) => card.removeEventListener('click', handleClick));
+      showLightbox();
+      return lightboxMessage.innerHTML = `<h1 style="color:#FF6347">TIME IS UP!<br>YOU LOSE!</h1>`;
+    }
+    if (!backCard.classList.contains('match')) {
+      winner = false;
+      break;
+  } else {
+    winner = true;
+  }
+}
+  if (winner === true) {
+    stopTimer();
+    cards.forEach((card) => card.removeEventListener('click', handleClick));
+    showLightbox();
+    return lightboxMessage.innerHTML = `<h1 style="color:#0B81F0">CONGRATS!<br>YOU WIN!</h1>`;
+  }
+ }
+```
+
 ## Technologies Used
  ![HTML Badge](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
  ![CSS Badge](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
